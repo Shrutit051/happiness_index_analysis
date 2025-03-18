@@ -5,6 +5,20 @@ This project analyzes the **World Happiness Index (2019)** dataset using Python,
 
 ## Dataset
 The dataset consists of **happiness scores and contributing factors** from different countries in 2019. It is stored in CSV format inside the **dataset sheets** directory.
+You can get the dataset from here -
+```bash
+import kagglehub
+
+Download latest version
+path = kagglehub.dataset_download("unsdsn/world-happiness")
+
+print("Path to dataset files:", path)
+```
+Or simply follow this link - 
+```bash
+https://www.kaggle.com/datasets/unsdsn/world-happiness
+```
+
 
 ## File Structure
 ```
