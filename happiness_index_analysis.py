@@ -92,6 +92,41 @@ sns.heatmap(numerical_df.corr(), annot=True, cmap='coolwarm')
 plt.title('Correlation Heatmap')
 plt.show()
 
+# Select only numerical features for correlation analysis
+numerical_df = df.select_dtypes(include=['number'])
+
+# Calculate correlations for numerical features
+plt.figure(figsize=(10, 8))
+sns.heatmap(numerical_df.corr(), annot=True, cmap='Spectral')
+plt.title('Correlation Heatmap')
+plt.show()
+
+import plotly.express as px
+# Plotly Choropleth Map
+fig = px.choropleth(df, 
+                     locations="Country or region", 
+                     locationmode="country names",
+                     color="Score", 
+                     hover_name="Country or region",
+                     title="Global Happiness Score (2019)",
+                     color_continuous_scale=px.colors.sequential.Plasma)
+
+fig.show()
+
+# Selecting key features
+selected_features = ["Score", "GDP per capita", "Healthy life expectancy", "Social support"]
+
+# Pairplot
+sns.pairplot(df[selected_features], diag_kind="kde")
+plt.show()
+
+plt.figure(figsize=(8, 6))
+sns.kdeplot(df["Score"], shade=True, color="blue", label="Happiness Score")
+sns.kdeplot(df["GDP per capita"], shade=True, color="green", label="GDP per Capita")
+sns.kdeplot(df["Healthy life expectancy"], shade=True, color="red", label="Life Expectancy")
+plt.legend()
+plt.title("KDE Plot of Key Variables")
+plt.show()
 
 
 
