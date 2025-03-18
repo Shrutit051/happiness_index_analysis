@@ -18,6 +18,10 @@ Or simply follow this link -
 ```bash
 https://www.kaggle.com/datasets/unsdsn/world-happiness
 ```
+Google colab link -
+```bash
+https://colab.research.google.com/drive/11V-3mSFvW379oDPy27MJHcXoWuRxTqWu?usp=sharing
+```
 
 
 ## File Structure
