@@ -5,8 +5,8 @@ Created on Tue Mar 18 11:52:18 2025
 @author: CCOEW
 """
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
+import matplotlib as plt # type: ignore
+#import seaborn as sns
 
 df = pd.read_csv('C:/Users/CCOEW/Desktop/469 dataset/2019.csv')
 
@@ -83,11 +83,15 @@ plt.ylabel('Happiness Score')
 plt.show()
 
 #correlation heatmap
+# Select only numerical features for correlation analysis
+numerical_df = df.select_dtypes(include=['number'])
 
+# Calculate correlations for numerical features
 plt.figure(figsize=(10, 8))
-sns.heatmap(df.corr(), annot=True, cmap='coolwarm')
-plt.title('Correlation heatmap')
+sns.heatmap(numerical_df.corr(), annot=True, cmap='coolwarm')
+plt.title('Correlation Heatmap')
 plt.show()
+
 
 
 
