@@ -128,6 +128,68 @@ plt.legend()
 plt.title("KDE Plot of Key Variables")
 plt.show()
 
+#linear regression
+# Selecting features (X) and target (y)
+X = df[['GDP per capita', 'Healthy life expectancy', 'Social support']]
+y = df['Score']
+
+# Check for missing values
+#print("Missing values before filling:", df.isnull().sum())
+
+# Fill numeric columns with the mean (Fixes FutureWarning)
+for column in df.select_dtypes(include=['number']).columns:
+    df.loc[:, column] = df[column].fillna(df[column].mean())
+
+# Splitting data into training and testing sets
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+
+lr_model = LinearRegression()
+lr_model.fit(X_train, y_train)
+
+y_pred_lr = lr_model.predict(X_test)
+
+# Evaluate the model
+print("Linear Regression Performance:")
+print("MSE:", mean_squared_error(y_test, y_pred_lr))
+print("R² Score:", r2_score(y_test, y_pred_lr))
+
+
+plt.scatter(y_test, y_pred_lr, label="Linear Regression", alpha=0.6)
+#plt.scatter(y_test, y_pred_rf, label="Random Forest", alpha=0.6)
+plt.plot([min(y_test), max(y_test)], [min(y_test), max(y_test)], color="red", linestyle="--")
+plt.xlabel("Actual Happiness Score")
+plt.ylabel("Predicted Happiness Score")
+plt.title("Regression Model Predictions")
+plt.legend()
+plt.show()
+
+#random forest predictions
+from sklearn.ensemble import RandomForestRegressor
+
+rf_model = RandomForestRegressor(n_estimators=100, random_state=42)
+rf_model.fit(X_train, y_train)
+
+y_pred_rf = rf_model.predict(X_test)
+
+# Evaluate Random Forest
+print("Random Forest Performance:")
+print("MSE:", mean_squared_error(y_test, y_pred_rf))
+print("R² Score:", r2_score(y_test, y_pred_rf))
+
+plt.scatter(y_test, y_pred_rf, label="Random Forest", alpha=0.6)
+plt.plot([min(y_test), max(y_test)], [min(y_test), max(y_test)], color="red", linestyle="--")
+plt.xlabel("Actual Happiness Score")
+plt.ylabel("Predicted Happiness Score")
+plt.title("Regression Model Predictions")
+plt.legend()
+plt.show()
+
+
+
 
 
 
